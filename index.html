@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhana: apps for Jira Cloud</title>
+<meta name="description" content="Muhana is a one-person software business in Finland. It makes Talteen, an app that restores deleted issues and attachments in Jira Cloud.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1c2b41;
+    --muted: #5b6b82;
+    --rule: #dfe4ec;
+    --accent: #0b5cd5;
+    --amber: #f9b21e;
+    --navy: #0e2232;
+    --tint: #f4f6fa;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161d;
+      --fg: #dde3ec;
+      --muted: #96a3b6;
+      --rule: #2a323e;
+      --accent: #6fa8ff;
+      --tint: #1b212b;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 var(--sans);
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  /* Same navigation as the docs site, so the two line up. */
+  nav {
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 3.5rem;
+    padding-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  nav a { color: var(--muted); text-decoration: none; margin-right: 1.25rem; display: inline-block; }
+  nav a:hover { color: var(--accent); }
+  nav .brand { color: var(--fg); font-weight: 600; margin-right: 1.75rem; }
+
+  /* The opening statement is the one loud thing on the page. */
+  .statement {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.85rem, 1.2rem + 3.2vw, 2.9rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.75rem;
+    max-width: 19em;
+    text-wrap: balance;
+  }
+  .statement::before {
+    content: "";
+    display: block;
+    width: 2.75rem;
+    height: 0.3rem;
+    background: var(--amber);
+    margin-bottom: 1.75rem;
+  }
+  .lede { font-size: 1.08rem; max-width: 36em; margin: 0 0 1rem; }
+  .signed { font-family: var(--serif); font-style: italic; font-size: 1.15rem; margin: 1.5rem 0 0; }
+
+  section { margin-top: 4.5rem; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.25;
+    margin: 0 0 0.35rem;
+  }
+  .sub { color: var(--muted); margin: 0 0 1.25rem; }
+  h2 + p:not(.sub) { margin-top: 0.85rem; }
+  p { margin: 0 0 1rem; max-width: 38em; }
+
+  /* Facts a reviewer checks, set as a register extract. */
+  dl.facts { margin: 1.75rem 0; border-top: 1px solid var(--rule); }
+  dl.facts > div {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    gap: 0 1.5rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  dl.facts dt { color: var(--muted); }
+  dl.facts dd { margin: 0; }
+  @media (max-width: 34rem) {
+    dl.facts > div { grid-template-columns: 1fr; }
+    dl.facts dt { font-size: 0.9rem; }
+  }
+
+  .get {
+    display: inline-block;
+    background: var(--navy);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.7rem 1.15rem;
+    border-radius: 4px;
+    border: 1px solid var(--navy);
+  }
+  .get:hover { background: #17344b; }
+  .get:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+  @media (prefers-color-scheme: dark) {
+    .get { border-color: #3a4a5c; }
+  }
+
+  ul.pages { list-style: none; padding: 0; margin: 1.5rem 0 0; columns: 2; column-gap: 2rem; max-width: 32rem; }
+  ul.pages li { padding: 0.2rem 0; break-inside: avoid; }
+  @media (max-width: 34rem) { ul.pages { columns: 1; } }
+
+  .app-head { display: flex; align-items: center; gap: 1rem; }
+  .app-head img { width: 56px; height: 56px; border-radius: 10px; flex: none; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 5rem;
+    padding-top: 1.25rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer p { margin: 0 0 0.4rem; max-width: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav aria-label="Site">
+    <a class="brand" href="/">Muhana</a>
+    <a href="#app">Talteen</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <h1 class="statement">Muhana is a one-person software business in Finland. I build apps for Jira Cloud.</h1>
+
+    <p class="lede">The first one is on the Atlassian Marketplace now. It runs on Atlassian Forge, so every copy it keeps stays in the customer's own Jira site. I have no server and no way to read customer data.</p>
+
+    <p class="signed">Waltteri Turunen</p>
+
+    <section id="app" aria-labelledby="app-title">
+      <div class="app-head">
+        <!-- <img src="icon.png" alt="" width="56" height="56"> -->
+        <div>
+          <h2 id="app-title">Talteen</h2>
+          <p class="sub">Restore deleted issues and attachments in Jira Cloud</p>
+        </div>
+      </div>
+
+      <p>Jira Cloud deletes issues (work items) and attachments for good. Talteen keeps a copy on your own Jira site. A site admin can restore a deleted issue with its fields, comments, links and files, or put a deleted file back on the issue it came from.</p>
+      <p>It can only restore what was deleted after you installed it, so install it before you need it.</p>
+
+      <dl class="facts">
+        <div><dt>Deleted issues are kept</dt><dd>60 days. You can set 1 to 365.</dd></div>
+        <div><dt>Deleted files are kept</dt><dd>14 days. You can set 1 to 90.</dd></div>
+        <div><dt>Where the copies are</dt><dd>Forge storage on your own Jira site. Nothing is sent to an outside service.</dd></div>
+        <div><dt>Who can restore</dt><dd>Site admins. Project admins too, if you allow it.</dd></div>
+        <div><dt>What does not come back</dt><dd>The original key, status, created date and change history. <a href="https://wturunen.github.io/undelete-legal/limitations">Known limitations</a> has the full list.</dd></div>
+      </dl>
+
+      <p><a class="get" href="https://marketplace.atlassian.com/apps/2355629686">View on the Atlassian Marketplace</a></p>
+
+      <ul class="pages">
+        <li><a href="https://wturunen.github.io/undelete-legal/docs">Documentation</a></li>
+        <li><a href="https://wturunen.github.io/undelete-legal/limitations">Known limitations</a></li>
+        <li><a href="https://wturunen.github.io/undelete-legal/security">Security</a></li>
+        <li><a href="https://wturunen.github.io/undelete-legal/privacy">Privacy policy</a></li>
+        <li><a href="https://wturunen.github.io/undelete-legal/dpa">Data Processing Addendum</a></li>
+        <li><a href="https://wturunen.github.io/undelete-legal/support">Support</a></li>
+      </ul>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">Who is behind it</h2>
+      <p>I build and support the app myself. A support email reaches the person who knows how the app works.</p>
+      <p>More about me: <a href="https://wate.dev/">wate.dev</a></p>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <dl class="facts">
+        <div><dt>Support</dt><dd><a href="mailto:support@muhana.fi">support@muhana.fi</a></dd></div>
+        <div><dt>Security reports</dt><dd><a href="mailto:security@muhana.fi">security@muhana.fi</a></dd></div>
+        <div><dt>Privacy questions</dt><dd><a href="mailto:privacy@muhana.fi">privacy@muhana.fi</a></dd></div>
+        <div><dt>Hours</dt><dd>Monday to Friday, 9:00 to 17:00 Finnish time. The target is a first answer within 48 hours.</dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer>
+    <p>Muhana, business ID 2642201-7, Vuorela, Finland.</p>
+    <p>Muhana is an independent Atlassian Marketplace partner and is not affiliated with Atlassian. Jira is a trademark of Atlassian.</p>
+  </footer>
+
+</div>
+</body>
+</html>
